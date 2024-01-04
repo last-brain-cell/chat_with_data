@@ -1,7 +1,6 @@
 import os
 import time
 from io import BytesIO
-
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from reportlab.pdfgen import canvas
@@ -28,8 +27,7 @@ def extract_text_from_message(message):
     if message.is_multipart():
         text_content = ""
         for part in message.walk():
-            if part.get_content_type() in ('text/plain', 'text/html'):
-                text_content += part.get_payload()
+            text_content += part.get_payload()
         return text_content
     else:
         return message.get_payload()
